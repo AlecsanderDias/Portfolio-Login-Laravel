@@ -1,3 +1,5 @@
 <x-layout>
-    {{ $resultado }}
+    @foreach($resultado as $dado) 
+        {{ $dado }}
+    @endforeach
 </x-layout>
