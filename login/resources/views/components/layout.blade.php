@@ -6,7 +6,17 @@
         @vite('resources/css/app.css')
         <title>Login do Sistema</title>
     </head>
-    <body class="bg-slate-400 absolute flex w-full h-full justify-center">
+    <body class="bg-slate-400 absolute flex flex-col w-full h-full justify-center">
+        <h1>Login</h1>
+        @if($errors->all())
+            <div class="bg-white">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li class="text-red-600 text-xl">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         {{ $slot }}
     </body>
 </html>

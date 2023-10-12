@@ -36,7 +36,7 @@ class LoginFormRequest extends FormRequest
     {
         return [
             'username.required' => 'O campo Usuário é obrigatório',
-            'password.required' => 'O campo Senha é obrigatório'
+            'password.required' => 'O campo Senha é obrigatório',
         ];
     }
 }
