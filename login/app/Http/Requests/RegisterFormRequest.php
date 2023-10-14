@@ -22,8 +22,8 @@ class RegisterFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required','min:5','max:50'],
-            'email' => ['required','email','min:5','max:50'],
+            'username' => ['required','min:5','max:50','unique:logins'],
+            'email' => ['required','email','min:5','max:50','unique:logins'],
             'password' => ['required','confirmed','min:5','max:20'],
             'password_confirmation' => ['required']
         ];
@@ -35,14 +35,15 @@ class RegisterFormRequest extends FormRequest
             'username' => [
                 'required' => 'O campo Nome é obrigatório',
                 'min' => 'O campo Nome precisa de no mínimo :min caracteres',
-                'max' => 'O campo Nome pode ter no máximo :max caracteres'
+                'max' => 'O campo Nome pode ter no máximo :max caracteres',
+                'unique' => 'O Nome de Usuário já está sendo usado'
             ],
             'email' => [
                 'required' => 'O campo Email é obrigatório',
                 'email' => 'O formato do Email não é válido',
                 'min' => 'O Email precisa de no mínimo :min caracteres',
                 'max' => 'O Email pode ter no máximo :max caracteres',
-                // 'unique' => 'O Email já está cadastrado'
+                'unique' => 'O Email já está sendo utilizado'
             ],
             'password' => [
                 'required' => 'A Senha é obrigatória',
