@@ -17,6 +17,6 @@ class RegisterController extends Controller
     public function store(RegisterFormRequest $request) {
         $login = $request->all();
         $login = $this->repository->createLogin($login);
-        return view('home')->with(['login' => $login]);
+        return to_route('home')->with(['login' => $login]);
     }
 }

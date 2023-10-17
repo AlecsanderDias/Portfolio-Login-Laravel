@@ -1,3 +1,6 @@
 <x-layout>
-        {{ $login->username }}
+        @auth
+                <a href="{{ route('logout') }}">Sair</a>
+        @endauth
+        {{ $login }}
 </x-layout>
