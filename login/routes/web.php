@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Middleware\Autenticador;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,8 @@ Route::get('/', function () {
     return to_route('login.index');
 });
 Route::resource('/login', LoginController::class)->only(['store','index']);
+Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::resource('/register', RegisterController::class)->only(['store','index']);
+Route::get('/home', function() {
+    return view('home')->with(['login' => "Tudo certo!!!"]);
+})->middleware(Autenticador::class)->name('home');

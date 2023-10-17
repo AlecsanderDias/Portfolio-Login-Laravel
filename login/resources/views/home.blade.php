@@ -1,5 +1,6 @@
 <x-layout>
-        @foreach($login as $dado)
-                {{ $dado }}
-        @endforeach
+        @auth
+                <a href="{{ route('logout') }}">Sair</a>
+        @endauth
+        {{ $login }}
 </x-layout>
