@@ -1,3 +1,5 @@
 <x-layout>
-        {{ $login->username }}
+        @foreach($login as $dado)
+                {{ $dado }}
+        @endforeach
 </x-layout>
