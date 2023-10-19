@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginFormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -16,7 +15,7 @@ class LoginController extends Controller
         if(!Auth::attempt($loginFormRequest->only(['username','password']))) {
             return redirect()->back()->withErrors("Nome de Usuário e/ou Senha incorretos!");
         }
-        return to_route('home');
+        return to_route('home.index');
     }
 
     public function destroy() {
