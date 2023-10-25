@@ -8,6 +8,13 @@
     </head>
     <body class="bg-slate-400 absolute flex flex-col w-full h-full justify-center">
         <h1>Login</h1>
+        @if(isset($sucesso))
+            <div class="bg-gray-400">
+                <ul>
+                    <li class="text-green-800 text-xl">{{ $sucesso }}</li>
+                </ul>
+            </div>
+        @endif
         @if($errors->all())
             <div class="bg-white">
                 <ul>
