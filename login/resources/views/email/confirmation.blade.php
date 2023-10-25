@@ -2,6 +2,7 @@
 # Confirmação de Registro
 
 Este é um email para confirmar a sua conta registrada no sistema de Login.
+<br>
 Usuário: {{ $username }}
 
 <x-mail::button :url="route('login.index')">

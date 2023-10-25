@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginFormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function index() {
+        if(Auth::user()) {
+            return redirect()->back();
+        }
         return view('login');
     }
 
@@ -21,5 +25,21 @@ class LoginController extends Controller
     public function destroy() {
         Auth::logout();
         return to_route('login.index');
+    }
+    
+    public function confirmEmail() {
+        return view('login.index')->with(['sucesso' => 'Email confirmado com sucesso']);
+    }
+
+    public function resetPassword() {
+
+    }
+
+    public function resendConfirmationEmail() {
+        
+    }
+
+    public function loginRecover(Request $request) {
+        dd($request);
     }
 }
