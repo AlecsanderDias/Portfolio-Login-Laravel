@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VerificationController;
 use App\Http\Middleware\Autenticador;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -26,16 +27,6 @@ Route::resource('/login', LoginController::class)->only(['store','index']);
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::resource('/register', RegisterController::class)->only(['store','index']);
 Route::resource('/home', HomeController::class)->only(['index'])->middleware('autenticador');
-Route::get('/email/verify', function () {
-    return to_route('home.index');
-})->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
- 
-    return redirect('/home');
-})->name('verification.verify');
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
- 
-    return back()->with('message', 'Link de verificação foi enviado ao seu email!');
-})->middleware('autenticador')->name('verification.send');
+Route::get('/verify', [VerificationController::class, 'warning'])->middleware('autenticador')->name('verification.warning');
+Route::get('/verify/{hash}', [VerificationController::class, 'confirmation'])->middleware('autenticador','signed')->name('verification.confirmed');
+Route::post('/verify/send', [VerificationController::class, 'resend'])->middleware('autenticador')->name('verification.send');
