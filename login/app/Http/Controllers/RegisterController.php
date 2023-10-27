@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class RegisterController extends Controller
 {
@@ -25,7 +26,16 @@ class RegisterController extends Controller
         $login = $request->all();
         $login = $this->repository->createLogin($login);
         // event(new Registered($login));
-        // Mail::to($login->email)->send(new ConfirmEmail($login->username));
-        return to_route('home.index')->with(['login' => $login]);
+        if($login->id) {
+            $link = $this->createConfirmationLink($login->id);
+        }
+        Mail::to($login->email)->send(new ConfirmEmail($login->username, $link));
+        Auth::login($login);
+        return to_route('verification.warning', ['email' => $login->email]);
+        // return to_route('home.index')->with(['login' => $login]);
+    }
+
+    public function createConfirmationLink(int $loginId) {
+        return URL::temporarySignedRoute('verification.confirmed', now()->addMinutes(10),['hash'=>sha1((string)$loginId)]);
     }
 }

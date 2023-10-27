@@ -16,7 +16,7 @@ class ConfirmEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $username)
+    public function __construct(public string $username, public string $link)
     {
         //
     }
@@ -38,7 +38,7 @@ class ConfirmEmail extends Mailable
     {
         return new Content(
             markdown: 'email.confirmation',
-            with: ['username' => $this->username],
+            with: ['username' => $this->username, 'link' => $this->link],
         );
     }
 

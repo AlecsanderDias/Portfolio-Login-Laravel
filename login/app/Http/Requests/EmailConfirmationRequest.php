@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EmailConfirmationRequest extends FormRequest
@@ -11,14 +12,9 @@ class EmailConfirmationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if (! hash_equals((string) $this->user()->getKey(), (string) $this->route('id'))) {
+        if (!hash_equals(sha1((string) $this->user()->getKey()), (string) $this->route('hash'))) {
             return false;
         }
-
-        if (! hash_equals(sha1($this->user()->getEmailForVerification()), (string) $this->route('hash'))) {
-            return false;
-        }
-
         return true;
     }
 
@@ -32,5 +28,19 @@ class EmailConfirmationRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * Fulfill the email verification request.
+     *
+     * @return void
+     */
+    public function fulfill()
+    {
+        if (! $this->user()->hasVerifiedEmail()) {
+            $this->user()->markEmailAsVerified();
+
+            event(new Verified($this->user()));
+        }
     }
 }
