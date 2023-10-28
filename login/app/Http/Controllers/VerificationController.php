@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmailConfirmationRequest;
+use App\Mail\ConfirmEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class VerificationController extends Controller
 {
     public function warning(Request $request) {
-        // dd($request->user()->getKey());
         return view('email.warning')->with(['email'=> $request->email]);
     }
 
@@ -19,8 +20,8 @@ class VerificationController extends Controller
     }
 
     public function resend(Request $request) {
-        $request->user()->sendEmailVerificationNotification();
- 
-        return back()->with('message', 'Link de verificação foi enviado ao seu email!');
+        $login = Auth::user();
+        sendConfirmationLink($login->id, $login->email, $login->username);
+        return to_route('home.index')->with(['message' => 'Link de verificação foi enviado ao seu email!', 'disable' => true]);
     }
 }
