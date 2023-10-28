@@ -12,6 +12,7 @@ class EmailConfirmationRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if(!$this->user()) return redirect()->back();
         if (!hash_equals(sha1((string) $this->user()->getKey()), (string) $this->route('hash'))) {
             return false;
         }
