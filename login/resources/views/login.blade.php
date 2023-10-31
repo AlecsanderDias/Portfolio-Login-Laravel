@@ -1,6 +1,6 @@
 <x-layout>
     <div class="flex flex-col h-2/4 w-3/5 outline-5 bg-slate-800 self-center justify-center rounded-md">
-        <form action="{{ route('login.store') }}" method="post" class="self-center w-3/4 h-3/4 ">
+        <form action="{{ route('login.') }}" method="post" class="self-center w-3/4 h-3/4 ">
             @csrf
             <div class="flex flex-col justify-center align-center self-center gap-5">
                 <label for="username" class="text-2xl text-white">Usuário</label>
@@ -11,5 +11,6 @@
             </div>
         </form>
         <a href="{{ route('register.index') }}" class="outline outline-offset-2 rounded-md outline-blue-500 text-white bg-slate-400 w-1/8">Registrar</a>
+        <a href="{{ route('forgot.password') }}" class="outline outline-offset-2 rounded-md outline-blue-500 text-green-800 bg-slate-400 w-1/8">Esqueceu a senha?</a>
     </div>
 </x-layout>

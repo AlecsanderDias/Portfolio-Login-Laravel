@@ -25,10 +25,8 @@ class RegisterController extends Controller
     public function store(RegisterFormRequest $request) {
         $login = $request->all();
         $login = $this->repository->createLogin($login);
-        // event(new Registered($login));
         sendConfirmationLink($login->id, $login->email, $login->username);
         Auth::login($login);
-        return to_route('verification.warning', ['email' => $login->email]);
-        // return to_route('home.index')->with(['login' => $login]);
+        return to_route('verification.warning')->with(['email' => $login->email]);
     }
 }

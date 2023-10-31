@@ -30,3 +30,5 @@ Route::resource('/home', HomeController::class)->only(['index'])->middleware('au
 Route::get('/verify', [VerificationController::class, 'warning'])->middleware('autenticador')->name('verification.warning');
 Route::get('/verify/{hash}', [VerificationController::class, 'confirmation'])->middleware('autenticador','signed')->name('verification.confirmed');
 Route::post('/verify/send', [VerificationController::class, 'resend'])->middleware('autenticador')->name('verification.send');
+Route::get('/forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot.password');
+Route::post('/forgot-password', [LoginController::class, 'passwordRecovery'])->name('password.recovery');

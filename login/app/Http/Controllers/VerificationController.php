@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Mail;
 class VerificationController extends Controller
 {
     public function warning(Request $request) {
-        return view('email.warning')->with(['email'=> $request->email]);
+        $email = $request->session()->get('email');
+        return view('email.warning')->with(['email'=> $email]);
     }
 
     public function confirmation(EmailConfirmationRequest $request) {

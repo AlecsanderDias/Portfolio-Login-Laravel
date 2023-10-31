@@ -31,15 +31,11 @@ class LoginController extends Controller
         return view('login.index')->with(['sucesso' => 'Email confirmado com sucesso']);
     }
 
-    public function resetPassword() {
-
+    public function forgotPassword() {
+        return view('forgotPassword');
     }
 
-    public function resendConfirmationEmail() {
-        
-    }
-
-    public function loginRecover(Request $request) {
+    public function passwordRecovery(Request $request) {
         dd($request);
     }
 }
