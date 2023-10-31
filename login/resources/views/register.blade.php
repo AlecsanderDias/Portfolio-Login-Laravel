@@ -1,5 +1,5 @@
 <x-layout>
-<form action="{{ route('register.store') }}" method="post" class="h-2/4 w-3/5 outline-5 bg-slate-800 self-center justify-center flex rounded-md">
+    <form action="{{ route('register.store') }}" method="post" class="h-2/4 w-3/5 outline-5 bg-slate-800 self-center justify-center flex rounded-md">
         @csrf
         <div class="w-3/4 h-3/4 flex flex-col justify-center align-center self-center gap-5">
             <label for="username" class="text-2xl text-white">Nome de Usuário</label>
@@ -13,4 +13,5 @@
             <button type="submit" class="outline outline-offset-2 rounded-md outline-blue-500 text-white bg-slate-400">Acessar</button>
         </div>
     </form>
+    <a href="{{ route('login.index') }}" class="outline outline-offset-2 rounded-md outline-blue-500 text-white bg-slate-400 w-1/8">Voltar</a>
 </x-layout>

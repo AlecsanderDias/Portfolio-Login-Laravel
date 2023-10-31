@@ -13,7 +13,6 @@ class HomeController extends Controller
         $verificado = Auth::user()->email_verified_at;
         $disable = $request->session()->has('disable') ? true : false;
         $message = $request->session()->has('message') ? $request->session()->get('message') : false;
-        // var_dump($request->session()->has('disable'), $request->session()->has('message'), $request->session()->get('disable'), $request->session()->get('message'));
         return view('home')->with(['username' => $username, 'email' => $email, 'verificado' => $verificado, 'disable' => $disable, 'message' => $message]);
     }
 }
