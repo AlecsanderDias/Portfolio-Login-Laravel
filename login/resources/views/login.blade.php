@@ -1,6 +1,6 @@
 <x-layout>
     <div class="flex flex-col h-2/4 w-3/5 outline-5 bg-slate-800 self-center justify-center rounded-md">
-        <form action="{{ route('login.') }}" method="post" class="self-center w-3/4 h-3/4 ">
+        <form action="{{ route('login.store') }}" method="post" class="self-center w-3/4 h-3/4 ">
             @csrf
             <div class="flex flex-col justify-center align-center self-center gap-5">
                 <label for="username" class="text-2xl text-white">Usuário</label>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Middleware\Autenticador;
@@ -30,5 +31,7 @@ Route::resource('/home', HomeController::class)->only(['index'])->middleware('au
 Route::get('/verify', [VerificationController::class, 'warning'])->middleware('autenticador')->name('verification.warning');
 Route::get('/verify/{hash}', [VerificationController::class, 'confirmation'])->middleware('autenticador','signed')->name('verification.confirmed');
 Route::post('/verify/send', [VerificationController::class, 'resend'])->middleware('autenticador')->name('verification.send');
-Route::get('/forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot.password');
-Route::post('/forgot-password', [LoginController::class, 'passwordRecovery'])->name('password.recovery');
+Route::get('/forgot-password', [PasswordController::class, 'forgotPassword'])->middleware('guest')->name('forgot.password');
+Route::post('/forgot-password', [PasswordController::class, 'passwordRecovery'])->middleware('guest')->name('password.recovery');
+Route::get('/reset-password/{token}/{email}', [PasswordController::class, 'passwordResetLink'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password', [PasswordController::class, 'passwordReset'])->middleware('guest')->name('reset.form');
