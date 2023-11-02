@@ -35,6 +35,7 @@ class ResetPasswordNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+                ->subject('Notificação de Troca de Senha')
                 ->markdown('email.reset', ['username' => $notifiable->username,'url' => $this->url]);
     }
 

@@ -28,7 +28,7 @@ class LoginController extends Controller
     }
     
     public function confirmEmail() {
-        return view('login.index')->with(['sucesso' => 'Email confirmado com sucesso']);
+        return view('login.index')->with(['message' => 'Email confirmado com sucesso']);
     }
 
 }
