@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Trocar a Senha">
     <div class="flex flex-col h-2/4 w-3/5 outline-5 bg-slate-800 self-center justify-center rounded-md">
         <h2 class="text-3xl text-white">Insira a nova senha para sua conta</h2>
         <form action="{{ route('reset.form') }}" method="post" class="h-2/4 w-3/5 outline-5 bg-slate-800 self-center justify-center flex rounded-md">

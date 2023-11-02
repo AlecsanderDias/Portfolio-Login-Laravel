@@ -32,10 +32,10 @@ class PasswordController extends Controller
     public function passwordReset(PasswordFormRequest $request) {
         $data = $request->except('_token');
         $status = $this->repository->resetPassword($data);
-        dd("Fim",$data);
+        // dd("Fim",$data);
      
         return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
+                    ? redirect()->route('login.index')->with(['status' => __($status), 'message' => 'A senha foi trocada com sucesso'])
                     : back()->withErrors(['email' => [__($status)]]);
     }
 }
