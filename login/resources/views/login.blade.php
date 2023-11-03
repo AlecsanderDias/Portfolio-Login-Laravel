@@ -1,4 +1,4 @@
-<x-layout title="Login">
+<x-layout title="Login" message="{{ $message }}">
     <section class="flex flex-col h-2/4 w-1/4 outline-5 bg-white self-center justify-center rounded-md outline-black shadow-xl">
         <div class="self-center w-3/4 flex flex-col gap-5">
             <h2 class="text-3xl text-center font-sans font-medium">Login</h2>

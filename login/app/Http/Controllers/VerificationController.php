@@ -12,12 +12,13 @@ class VerificationController extends Controller
 {
     public function warning(Request $request) {
         $email = $request->session()->get('email');
+        // dd($request->session());
         return view('email.warning')->with(['email'=> $email]);
     }
 
     public function confirmation(EmailConfirmationRequest $request) {
         $request->fulfill();
-        return to_route('home.index');
+        return to_route('home.index')->with('message','O email foi verificado com sucesso!');
     }
 
     public function resend(Request $request) {

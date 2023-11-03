@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         if(Auth::user()) {
             return redirect()->back();
         }
-        return view('login');
+        $message = $request->session()->get('message');
+        return view('login')->with(['message'=> $message]);
     }
 
     public function store(LoginFormRequest $loginFormRequest) {
