@@ -1,12 +1,5 @@
-<x-layout>
+<x-layout title="Home" username="{{ $username }}">
         @auth
-                @if($message)
-                <div class="bg-gray-400">
-                        <ul>
-                        <li class="text-green-800 text-xl">{{ $message }}</li>
-                        </ul>
-                </div>
-                @endif
                 <p>{{ $username }}</p>
                 <p>{{ $email }}</p>
                 @if($verificado == null)

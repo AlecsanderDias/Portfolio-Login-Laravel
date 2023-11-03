@@ -19,9 +19,8 @@ class PasswordController extends Controller
         $request->validate(['email' => 'required|email']);
         $status = Password::sendResetLink($request->only('email'));
         // dd($request->only('email'));
- 
         return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
+            ? to_route('login.index')->with(['status' => __($status), 'message' => 'Um link foi enviado ao seu email para trocar a senha!'])
             : back()->withErrors(['email' => __($status)]);
     }
 

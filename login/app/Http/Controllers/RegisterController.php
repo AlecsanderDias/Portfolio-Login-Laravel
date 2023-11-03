@@ -24,6 +24,7 @@ class RegisterController extends Controller
 
     public function store(RegisterFormRequest $request) {
         $login = $request->all();
+        // dd($login);
         $login = $this->repository->createLogin($login);
         sendConfirmationLink($login->id, $login->email, $login->username);
         Auth::login($login);
