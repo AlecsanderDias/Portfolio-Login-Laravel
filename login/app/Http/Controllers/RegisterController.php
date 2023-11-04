@@ -15,11 +15,12 @@ class RegisterController extends Controller
 {
     public function __construct(private EloquentLoginRepository $repository) {
     }
-    public function index() {
+    public function index(Request $request) {
         if(Auth::user()) {
             return redirect()->back();
         }
-        return view('register');
+        $message = $request->session()->has('message') ? $request->session()->get('message') : null;
+        return view('register')->with('message', $message);
     }
 
     public function store(RegisterFormRequest $request) {
@@ -28,6 +29,6 @@ class RegisterController extends Controller
         $login = $this->repository->createLogin($login);
         sendConfirmationLink($login->id, $login->email, $login->username);
         Auth::login($login);
-        return to_route('verification.warning')->with(['email' => $login->email]);
+        return to_route('verification.warning')->with(['email' => $login->email ]);
     }
 }

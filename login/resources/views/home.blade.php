@@ -1,17 +1,5 @@
-<x-layout title="Home" username="{{ $username }}">
-        @auth
-                <p>{{ $username }}</p>
-                <p>{{ $email }}</p>
-                @if($verificado == null)
-                        <p>{{ "Email precisa ser verificado!" }}</p>
-                        <form action="{{ route('verification.send') }}" method="post" class="bg-green-300 cursor-pointer">
-                                @csrf
-                                <button type="submit" id="resend" @if($disable) disabled @endif>Reenviar Email</button>
-                        </form>
-                @else
-                        <p>{{ "Email verificado!" }}</p> 
-                @endif
-                <a href="{{ route('logout') }}" class="bg-red-500">Sair</a>
-        @endauth
-        {{ "Menu Home $disable $message" }}
+<x-layout title="Home" message="{{ $message }}" verification="{{ $verification }}" username="{{ $username }}" email="{{ $email }}" disable="{{ $disable }}">
+        <section class="flex flex-col h-full justify-center text-center">
+                <h2 class="text-4xl text-black font-sans font-bold">Bem vindo ao menu de Login!</h2>
+        </section>
 </x-layout>

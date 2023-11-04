@@ -1,4 +1,4 @@
-<x-layout title="Registrar">
+<x-layout title="Registrar" message="{{ $message }}">
     <section class="flex flex-col h-3/5 w-1/4 outline-5 bg-white self-center justify-center rounded-md outline-black shadow-xl">
         <div class="self-center w-3/4 flex flex-col gap-5">
             <h2 class="text-3xl text-center font-sans font-medium pb-1">Registrar</h2>
