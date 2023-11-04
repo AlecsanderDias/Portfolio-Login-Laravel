@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmailFormRequest;
 use App\Http\Requests\PasswordFormRequest;
 use App\Repositories\EloquentLoginRepository;
 use Illuminate\Http\Request;
@@ -11,17 +12,16 @@ class PasswordController extends Controller
 {
     public function __construct(private EloquentLoginRepository $repository) {}
 
-    public function forgotPassword() {
-        return view('password.forgot');
+    public function forgotPassword(Request $request) {
+        $message = $request->session()->has('message') ? $request->session()->get('message') : null;
+        return view('password.forgot')->with('message', $message);
     }
 
-    public function passwordRecovery(Request $request) {
-        $request->validate(['email' => 'required|email']);
+    public function passwordRecovery(EmailFormRequest $request) {
         $status = Password::sendResetLink($request->only('email'));
         // dd($request->only('email'));
-        return $status === Password::RESET_LINK_SENT
-            ? to_route('login.index')->with(['status' => __($status), 'message' => 'Um link foi enviado ao seu email para trocar a senha!'])
-            : back()->withErrors(['email' => __($status)]);
+        $status === Password::RESET_LINK_SENT;
+        return to_route('login.index')->with(['status' => __($status), 'message' => 'Um link foi enviado ao seu email para trocar a senha!']);
     }
 
     public function passwordResetLink(string $token, string $email) {

@@ -1,4 +1,4 @@
-<x-layout title="Esqueci a Senha">
+<x-layout title="Esqueci a Senha" message="{{ $message }}">
     <section class="flex flex-col h-2/4 w-1/4 outline-5 bg-white self-center justify-center rounded-md outline-black shadow-xl">
         <div class="self-center h-3/4 w-3/4 flex flex-col gap-5">
             <h2 class="text-2xl text-center font-sans font-medium">Insira o email cadastrado que receberá um link, para trocar a senha</h2>
